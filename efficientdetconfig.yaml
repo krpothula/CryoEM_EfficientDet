@@ -1,0 +1,9 @@
+# EfficientDet training parameters
+num_classes: 1
+max_instances_per_image: 150
+moving_average_decay: 0
+mixed_precision: true
+image_size: 512x512
+label_map: {1: 'Protein'}
+input_rand_hflip: True
+autoaugment_policy: v0

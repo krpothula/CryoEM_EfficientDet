@@ -1,0 +1,7 @@
+path: TcdA1/trainvaltest/
+train: images/train_data
+val: images/valid_data
+
+# Classes
+nc: 1
+names: [ 'Protein']  # class names

@@ -1,0 +1,76 @@
+# EfficientDet training parameters
+num_classes: 1
+max_instances_per_image: 150
+moving_average_decay: 0
+mixed_precision: true
+image_size: 512x512
+label_map: {1: 'Protein'}
+input_rand_hflip: True
+autoaugment_policy: v0
+
+
+# Processing Stage 1: Data preparation
+# Base directory where data are stored, 
+# all other data path are relative to this
+s1_base_dir: TcdA1/                         # Input
+
+# Directory with png images
+s1_image_dir: images/
+s1_datasplit: Datasplit16.xlsx
+# Directory with annotation
+s1_annotation_dir: annotation_boxes/
+# Good Defaults
+# It can take value from 1 to 7
+s1_start_step: 1
+s1_annot_cleanup: annotation_cleanup/
+s1_train_data: train_data/
+s1_val_data: valid_data/
+s1_test_data: test_data/
+s1_train_img_path: trainvaltest/images/train_data
+s1_train_box_path: trainvaltest/boxes/train_data
+s1_train_lbl_path: trainvaltest/labels/train_data
+s1_val_img_path: trainvaltest/images/valid_data
+s1_val_box_path: trainvaltest/boxes/valid_data
+s1_val_lbl_path: trainvaltest/labels/valid_data
+s1_test_img_path: trainvaltest/images/test_data
+s1_image_dim: 4096
+s1_dim: 768
+s1_partition: 8
+s1_factor: 0.18
+s1_vis_train: visualization/train/
+s1_vis_val: visualization/valid/
+s1_train_coco: coco_train_annotation.json
+s1_val_coco: coco_val_annotation.json
+s1_train_tfrecord: tf_data/protein_train
+s1_val_tfrecord: tf_data/protein_val
+
+
+# Processing Stage 3: Model prediction
+# It can take value from 1 to 3
+s3_start_step: 1
+s3_test_img_path: trainvaltest/images/test_data_small/*.png
+# EfficientDet D0 Parameters
+# True/False
+s3_edd0_process: False
+# Update the latest model dir
+s3_edd0_saved_model_dir: exported_model_4-6/
+# Good Defaults
+s3_edd0_config: efficientdetconfig.yaml
+s3_edd0_output_prediction_raw: predictions/predictions_raw.csv
+s3_edd0_output_image_dir: predictions/test/
+s3_edd0_output_prediction_final: predictions/predictions_final.csv
+s3_edd0_output_prediction_box: predictions/box/
+s3_edd0_output_image_dir_final: predictions/test_final/
+
+# Yolo V5 Small Parameters
+# True/False
+s3_yv5s_process: True
+# Update the latest model dir
+s3_yv5s_saved_model_dir: yolomodel6/weights/last.pt
+# Good defaults
+s3_yv5s_output_prediction_raw: predictions/predictions_raw_yv5s.csv
+s3_yv5s_output_image_dir: predictions/test_yv5s/
+s3_yv5s_output_prediction_final: predictions/predictions_final_yv5s.csv
+s3_yv5s_output_prediction_box: predictions/box_yv5s/
+s3_yv5s_output_image_dir_final: predictions/test_final_yv5s/
+
